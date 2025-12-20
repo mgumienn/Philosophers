@@ -6,11 +6,12 @@
 /*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 19:06:08 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/12/19 19:59:17 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/12/20 12:57:11 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
 
 typedef struct s_box
 {
@@ -22,4 +23,4 @@ typedef struct s_box
 }	t_box;
 
 int	ft_error(char *s, int status);
-int	validate(int argc, int argv, t_box *box);
+int	validate(int argc, char **argv, t_box *box);
