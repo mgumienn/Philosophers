@@ -13,8 +13,7 @@
                 "-g",
                 "-o",
                 "${workspaceFolder}/philo",
-                "philosophers.c",
-                "validation.c"
+                "*.c"
             ],
             "group": {
                 "kind": "build",

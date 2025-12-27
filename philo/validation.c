@@ -6,7 +6,7 @@
 /*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 19:34:09 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/12/20 13:14:16 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/12/27 13:52:42 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ long	ft_atol(char *s)
 	n = 0;
 	while (s[i])
 	{
-		if (!(s[i] >= '0' && s[i] <= '9'))
-			return (ft_error("Incorrect data", 0), -1);
+		if (s[i] < '0' || s[i] > '9')
+			return (ft_error("Incorrect data", 1), -1);
 		else
 			n = n * 10 + (s[i] - 48);
 		i++;
@@ -38,5 +38,8 @@ int	validate(int argc, char **argv, t_box *box)
 	box->sleep = ft_atol(argv[4]);
 	if (argc > 5)
 		box->eat_count = ft_atol(argv[5]);
+	else
+		box->eat_count = -1;
+	box->dead_flag = -1;
 	return (box->nbr);
 }
