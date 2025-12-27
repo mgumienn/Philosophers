@@ -6,7 +6,7 @@
 #    By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/20 00:00:00 by mgumienn          #+#    #+#              #
-#    Updated: 2025/12/20 13:06:44 by mgumienn         ###   ########.fr        #
+#    Updated: 2025/12/27 16:24:52 by mgumienn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pthread
 INCLUDES = -I.
 
-# Lista plików źródłowych - łatwo podmienić *.c na konkretne nazwy
-SRCS = $(wildcard *.c)
-# Alternatywnie, gotowe do podmiany na:
-# SRCS = philosophers.c validation.c
+
+SRCS = main.c init.c monitor.c routine.c utils.c validation.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -41,4 +39,4 @@ fclean: clean
 re: fclean all
 
 norm:
-	norminette $(SRCS) philosophers.h || true
+	norminette $(SRCS) philosophers.h
