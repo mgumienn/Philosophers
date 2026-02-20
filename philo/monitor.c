@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: mgumienn <mgumienn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 23:45:00 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/12/27 14:07:18 by mgumienn         ###   ########.fr       */
+/*   Updated: 2026/02/01 13:26:48 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,17 @@ int	check_all_finished(t_box *box, t_philo *philos)
 {
 	int	i;
 	int	finished;
+	int	eat_count;
 
 	i = -1;
 	finished = 0;
+	pthread_mutex_lock(&box->meal_lock);
+	eat_count = box->eat_count;
+	pthread_mutex_unlock(&box->meal_lock);
 	while (++i < box->nbr)
 	{
 		pthread_mutex_lock(&box->meal_lock);
-		if (box->eat_count != -1
-			&& philos[i].eat_count >= box->eat_count)
+		if (eat_count != -1 && philos[i].eat_count >= eat_count)
 			finished++;
 		pthread_mutex_unlock(&box->meal_lock);
 	}

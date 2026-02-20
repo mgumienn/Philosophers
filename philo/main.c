@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: mgumienn <mgumienn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 23:45:00 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/12/27 14:30:00 by mgumienn         ###   ########.fr       */
+/*   Updated: 2026/02/01 12:42:43 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	set_start_time(t_philo *philo, t_box *box)
 {
 	int	i;
 
+	pthread_mutex_lock(&box->start_lock);
 	box->start_time = get_time();
+	pthread_mutex_unlock(&box->start_lock);
 	i = -1;
 	while (++i < box->nbr)
 		philo[i].last_meal = box->start_time;

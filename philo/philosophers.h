@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: mgumienn <mgumienn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 19:06:08 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/12/27 13:03:24 by mgumienn         ###   ########.fr       */
+/*   Updated: 2026/02/01 12:42:43 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_box
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_lock;
+	pthread_mutex_t	start_lock;
 }	t_box;
 
 typedef struct s_philo

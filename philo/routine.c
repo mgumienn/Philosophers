@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: mgumienn <mgumienn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 23:45:00 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/12/27 14:10:38 by mgumienn         ###   ########.fr       */
+/*   Updated: 2026/02/01 12:52:48 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,20 @@
 void	eat_routine(t_philo *philo)
 {
 	t_box	*box;
+	int		first_fork;
+	int		second_fork;
 
 	box = philo->box;
-	pthread_mutex_lock(&philo->forks[philo->id]);
+	first_fork = philo->id;
+	second_fork = (philo->id + 1) % box->nbr;
+	if (first_fork > second_fork)
+	{
+		first_fork = second_fork;
+		second_fork = philo->id;
+	}
+	pthread_mutex_lock(&philo->forks[first_fork]);
 	print_msg(box, philo->id, "has taken a fork");
-	pthread_mutex_lock(&philo->forks[(philo->id + 1) % box->nbr]);
+	pthread_mutex_lock(&philo->forks[second_fork]);
 	print_msg(box, philo->id, "has taken a fork");
 	print_msg(box, philo->id, "is eating");
 	pthread_mutex_lock(&box->meal_lock);
@@ -45,8 +54,17 @@ int	handle_single_philo(t_philo *philo)
 
 void	wait_start(t_box *box, t_philo *philo)
 {
-	while (box->start_time == 0)
+	while (1)
+	{
+		pthread_mutex_lock(&box->start_lock);
+		if (box->start_time != 0)
+		{
+			pthread_mutex_unlock(&box->start_lock);
+			break ;
+		}
+		pthread_mutex_unlock(&box->start_lock);
 		ft_usleep(1);
+	}
 	pthread_mutex_lock(&box->meal_lock);
 	philo->last_meal = box->start_time;
 	pthread_mutex_unlock(&box->meal_lock);

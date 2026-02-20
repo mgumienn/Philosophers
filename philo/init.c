@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: mgumienn <mgumienn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 23:45:00 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/12/27 14:30:21 by mgumienn         ###   ########.fr       */
+/*   Updated: 2026/02/01 12:42:43 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_mutexes(t_box *box)
 	pthread_mutex_init(&box->write_lock, NULL);
 	pthread_mutex_init(&box->dead_lock, NULL);
 	pthread_mutex_init(&box->meal_lock, NULL);
+	pthread_mutex_init(&box->start_lock, NULL);
 	i = -1;
 	while (++i < box->nbr)
 		pthread_mutex_init(&box->forks[i], NULL);
